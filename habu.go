@@ -75,6 +75,11 @@ func (h *Habu) ToCobra(opts ...Option) ([]*cobra.Command, error) {
 	var root []*cobra.Command
 	for _, path := range h.sortedKeys() {
 		cmd := h.commands[path]
+
+		if cmd.Parent() != nil {
+			continue
+		}
+
 		dirPath := dir(path)
 
 		if dirPath == "/" {

@@ -48,10 +48,11 @@ func TestHabu(t *testing.T) {
 		}
 	}
 
-	root, err := inst.Build()
+	roots, err := inst.ToCobra()
 	if err != nil {
 		t.Fatal(err)
 	}
+	root := roots[0]
 
 	subs := root.Commands()
 	if len(subs) != 2 {
@@ -93,10 +94,11 @@ func TestHabu_CreateIntermediateCommands(t *testing.T) {
 		t.Fatal(err)
 	}
 
-	root, err := inst.Build(habu.CreateIntermediateCommands(true))
+	roots, err := inst.ToCobra(habu.CreateIntermediateCommands(true))
 	if err != nil {
 		t.Fatal(err)
 	}
+	root := roots[0]
 
 	if root.Name() != "path" {
 		t.Fatal(root.Name())
